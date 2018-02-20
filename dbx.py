@@ -3,7 +3,7 @@
 
 # Developed by AKstudios
 # https://github.com/AKstudios
-# Septermber 22, 2017
+# Updated: February 20, 2018
 
 from picamera import PiCamera
 from time import sleep
@@ -14,10 +14,10 @@ from dropbox.exceptions import ApiError, AuthError
 import time
 import datetime
 
-TOKEN = 'fJHKSv0VXNdsfgadfAALOLDQuA35lkC5zzRUHXsA3S8UsadWDXEWTFzrqq0shV_'
+TOKEN = 'fJHKSv0VXNdsfgadfAALOLDQuA35lkC5zzRUHXsA3S8UsadWDXEWTFzrqq0shV_'   # set dropbox app access token
 dt = datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
 LOCALFILE = '/home/pi/timelapse/%s.jpg' % dt
-BACKUPPATH = '/Apps/AK_rpi3/timelapse/%s.jpg' % dt
+BACKUPPATH = '/Apps/AK_rpi3/timelapse/%s.jpg' % dt  # set path to save pics in dropbox
 
 # Setup Dropbox and upload
 def upload():
@@ -58,8 +58,8 @@ if __name__ == '__main__':
     # Check for an access token
     if (len(TOKEN) == 0):
         sys.exit("ERROR: Naw man, Looks like you didn't add your access token. "
-            "Open up backup-and-restore-example.py in a text editor and "
-            "paste in your token in line 14.")
+            "Open up dbx.py in a text editor and "
+            "paste in your token in line 17.")
 
     # Create an instance of a Dropbox class, which can make requests to the API.
     #print("Creating a Dropbox object using your token...")
@@ -72,8 +72,8 @@ if __name__ == '__main__':
         sys.exit("ERROR: Invalid access token; What are you even typing fam? Try re-generating an "
             "access token from the app console on the web.")
 
-    # Take timelapse forever
-    #while True:
+    # Take timelapse
+    #while True: # Take timelapse forever - uncheck this line and sleep() line to continously take timelapse
     capture()   # take image using rpi camera
     upload()    # upload image to dropbox
     #print("Uploaded! Das wussup, bro.")
